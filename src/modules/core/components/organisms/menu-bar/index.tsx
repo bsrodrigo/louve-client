@@ -1,4 +1,4 @@
-import { Box, Container, useTheme } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import { NavBar, TopBar } from "@/modules/core/components/organisms";
 

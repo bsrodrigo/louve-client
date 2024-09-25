@@ -1,6 +1,6 @@
 import { Link01Icon } from "hugeicons-react";
 
-import { Box, Link, Typography, useTheme } from "@mui/material";
+import { Box, Container, Link, Typography, useTheme } from "@mui/material";
 import { AudioPlayer, FileViewer } from "@/modules/core/components/molecules";
 
 export interface MusicItemSectionProps {
@@ -91,7 +91,9 @@ export const MusicItemSection = ({
       )}
 
       {type === "document" && src && documentType && (
-        <FileViewer file={src} type={documentType} />
+        <Container sx={{ padding: "0 !important", margin: 0 }} maxWidth="lg">
+          <FileViewer file={src} type={documentType} />
+        </Container>
       )}
     </Box>
   );

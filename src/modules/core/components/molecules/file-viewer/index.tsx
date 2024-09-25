@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 // @ts-ignore
 import ReactFileViewer from "react-file-viewer";
 
@@ -12,8 +12,15 @@ interface FileViewerProps {
 }
 
 export const FileViewer = ({ file, type }: FileViewerProps) => {
+  const theme = useTheme();
+
   return (
-    <Box borderRadius={4} overflow="hidden">
+    <Box
+      borderRadius={4}
+      overflow="hidden"
+      padding={1}
+      bgcolor={theme.palette.background.default}
+    >
       <Box
         maxHeight="90vh"
         textAlign="center"
@@ -25,6 +32,7 @@ export const FileViewer = ({ file, type }: FileViewerProps) => {
           },
           "& canvas": {
             width: "100%",
+            borderRadius: theme.spacing(2),
           },
         }}
       >
