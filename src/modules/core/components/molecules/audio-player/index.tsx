@@ -50,8 +50,8 @@ export const AudioPlayer: React.FC<{ src: string }> = ({ src }) => {
       alignItems="center"
       bgcolor={theme.palette.background.default}
       borderRadius={2}
-      maxWidth={800}
       padding={1}
+      width="100%"
     >
       <IconButton onClick={togglePlayPause}>
         {isPlaying ? <PauseIcon /> : <PlayIcon />}

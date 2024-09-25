@@ -1,6 +1,14 @@
-import { Link01Icon } from "hugeicons-react";
+import { CloudDownloadIcon, Link01Icon } from "hugeicons-react";
 
-import { Box, Container, Link, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  IconButton,
+  Link,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { AudioPlayer, FileViewer } from "@/modules/core/components/molecules";
 
 export interface MusicItemSectionProps {
@@ -44,14 +52,37 @@ export const MusicItemSection = ({
   }
 
   return (
-    <Box id={`music-section-item-${type}-${documentType}`}>
+    <Box id={`music-section-item-${type}-${documentType}`} width="100%">
       {type === "audio" && src && (
         <>
           <Typography variant="overline" color="textSecondary">
             {title}
           </Typography>
+          <Box
+            display="flex"
+            alignItems="center"
+            gap={1}
+            maxWidth={840}
+            width="100%"
+          >
+            <AudioPlayer src={src} />
 
-          <AudioPlayer src={src} />
+            <IconButton
+              aria-label="download"
+              size="large"
+              color="primary"
+              onClick={() => {
+                const link = document.createElement("a");
+                link.href = src;
+                link.download = title;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              }}
+            >
+              <CloudDownloadIcon />
+            </IconButton>
+          </Box>
 
           {/* TODO rever necessidade da lib */}
           {/* <AudioPlayer
@@ -92,6 +123,24 @@ export const MusicItemSection = ({
 
       {type === "document" && src && documentType && (
         <Container sx={{ padding: "0 !important", margin: 0 }} maxWidth="lg">
+          <Box display="flex" alignItems="center" justifyContent="flex-end">
+            <Button
+              endIcon={<CloudDownloadIcon />}
+              aria-label="download"
+              size="large"
+              color="primary"
+              onClick={() => {
+                const link = document.createElement("a");
+                link.href = src;
+                link.download = title;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+              }}
+            >
+              Baixar
+            </Button>
+          </Box>
           <FileViewer file={src} type={documentType} />
         </Container>
       )}

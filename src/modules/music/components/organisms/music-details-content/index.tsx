@@ -28,6 +28,12 @@ export const MusicDetailsContent = (): JSX.Element => {
           <b>Música</b>
         </Typography>
         <Typography variant="h4">{data?.name}</Typography>
+        <MusicItemSection
+          key="audio-kit-original"
+          title="Original"
+          type="audio"
+          src={data?.originalSound}
+        />
       </Box>
 
       <MusicContentSection title="Links úteis">
