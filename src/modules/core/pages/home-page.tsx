@@ -14,6 +14,32 @@ import { FileViewer } from "@/modules/core/components/organisms";
 const HomePage = (): JSX.Element => {
   const theme = useTheme();
   const navigate = useNavigate();
+
+  const handleShare = async () => {
+    const shareUrl = "https://louveweb.vercel.app/music-details";
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: "Louve App",
+          text: "Tenha acesso aos louvores do seu grupo na palma da sua mão!",
+          url: shareUrl,
+        });
+        console.log("Conteúdo compartilhado com sucesso!");
+      } catch (error) {
+        console.error("Erro ao compartilhar:", error);
+      }
+    } else {
+      navigator.clipboard.writeText(shareUrl).then(
+        () => {
+          alert("Link copiado para a área de transferência!");
+        },
+        (err) => {
+          console.error("Erro ao copiar link:", err);
+        }
+      );
+    }
+  };
+
   return (
     <Box>
       <Header
@@ -54,6 +80,7 @@ const HomePage = (): JSX.Element => {
                 size="large"
                 sx={{ bgcolor: theme.palette.action.hover }}
                 aria-label="Compartilhar"
+                onClick={handleShare}
               >
                 <Share08Icon />
               </IconButton>
