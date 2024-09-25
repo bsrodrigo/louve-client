@@ -2,20 +2,34 @@ import { Box, Divider, Typography } from "@mui/material";
 
 import { MusicContentSection } from "@/modules/music/components/molecules";
 import { MusicItemSection } from "@/modules/music/components/organisms";
-import { musicKitData } from "@/modules/music/infra/data";
+import { musicKitsData } from "@/modules/music/infra/data";
+import { useParams } from "react-router-dom";
 
 export const MusicDetailsContent = (): JSX.Element => {
+  const { id } = useParams();
+  const data = musicKitsData?.find((musicKit) => musicKit.id === id);
+
+  console.log({ id, data });
+
+  if (!data?.id) {
+    return (
+      <Typography variant="h5" color="textSecondary">
+        Item não encontrado
+      </Typography>
+    );
+  }
+
   return (
     <Box display="flex" flexDirection="column" gap={4}>
       <Box>
         <Typography variant="overline" color="textSecondary">
           <b>Música</b>
         </Typography>
-        <Typography variant="h4">{musicKitData?.name}</Typography>
+        <Typography variant="h4">{data?.name}</Typography>
       </Box>
 
       <MusicContentSection title="Links úteis">
-        {musicKitData?.usefulLinks?.map((link, index) => (
+        {data?.usefulLinks?.map((link, index) => (
           <MusicItemSection
             key={`link-kit-${index}`}
             title={link?.title}
@@ -26,7 +40,7 @@ export const MusicDetailsContent = (): JSX.Element => {
       </MusicContentSection>
 
       <MusicContentSection title="Kit de voz">
-        {musicKitData?.audioKit?.map((audio, index) => (
+        {data?.audioKit?.map((audio, index) => (
           <MusicItemSection
             key={`audio-kit-${index}`}
             title={audio?.title}
@@ -39,7 +53,7 @@ export const MusicDetailsContent = (): JSX.Element => {
       <Divider />
 
       <MusicContentSection title="Letra">
-        {musicKitData?.documents?.map((document, index) => (
+        {data?.documents?.map((document, index) => (
           <MusicItemSection
             key={`document-kit-${index}`}
             title={document?.title}

@@ -1,8 +1,15 @@
 import { AudioPlayer } from "react-audio-player-component";
 import { Link01Icon } from "hugeicons-react";
 
-import { Box, Link, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  CircularProgress,
+  Link,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { FileViewer } from "@/modules/core/components/molecules";
+import { useState } from "react";
 
 export interface MusicItemSectionProps {
   title: string;
@@ -20,6 +27,7 @@ export const MusicItemSection = ({
   type,
 }: MusicItemSectionProps): JSX.Element => {
   const theme = useTheme();
+  const [loading, setLoading] = useState(false);
 
   console.log({ title, link, src, documentType, type });
 
@@ -47,7 +55,20 @@ export const MusicItemSection = ({
             {title}
           </Typography>
 
+          {loading && <CircularProgress />}
+
           <AudioPlayer
+            onloadstart={(event) => {
+              setLoading(true);
+              console.log("onloadstart", { event });
+            }}
+            onloadedmetadata={(event) => {
+              setLoading(false);
+              console.log("onloadedmetadata", { event });
+            }}
+            onwaiting={(event) => {
+              console.log("onwaiting", { event });
+            }}
             key={`audio-${title}`}
             src={src}
             minimal={true}
