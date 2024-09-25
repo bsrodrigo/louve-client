@@ -8,6 +8,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { LinkSquare02Icon, Share08Icon } from "hugeicons-react";
+import { FileViewer } from "@/modules/core/components/organisms";
 
 const HomePage = (): JSX.Element => {
   const theme = useTheme();
@@ -23,6 +24,8 @@ const HomePage = (): JSX.Element => {
           { label: "Congresso " },
         ]}
       />
+
+      <FileViewer />
 
       <Box display="flex" alignItems="center" flexWrap="wrap" gap={4}>
         <Card
