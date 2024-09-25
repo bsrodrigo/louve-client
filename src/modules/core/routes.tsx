@@ -7,7 +7,7 @@ import { partnersRoutes } from "@/modules/partners/routes";
 const HomePage = lazy(() => import("@/modules/core/pages/home-page"));
 
 const MusicDetails = lazy(
-  () => import("@/modules/core/pages/music-details-page")
+  () => import("@/modules/music/pages/music-details-page")
 );
 
 export const router = createBrowserRouter([

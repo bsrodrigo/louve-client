@@ -1,15 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { LinkSquare02Icon, Share08Icon } from "hugeicons-react";
-import {
-  Box,
-  Card,
-  CardHeader,
-  IconButton,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Box, Card, IconButton, Typography, useTheme } from "@mui/material";
 import { Header } from "@/modules/core/components/molecules";
-import { FileViewer } from "@/modules/core/components/organisms";
 
 const HomePage = (): JSX.Element => {
   const theme = useTheme();

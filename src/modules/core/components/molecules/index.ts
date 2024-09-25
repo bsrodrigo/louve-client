@@ -1,5 +1,6 @@
 export * from "./currency-text-field";
 export * from "./dialog";
+export * from "./file-viewer";
 export * from "./header";
 export * from "./loading-content";
 export * from "./nav-bar-brand";

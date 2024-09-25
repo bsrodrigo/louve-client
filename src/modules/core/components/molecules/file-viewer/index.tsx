@@ -2,17 +2,16 @@ import { Box } from "@mui/material";
 // @ts-ignore
 import ReactFileViewer from "react-file-viewer";
 
-// const file =
-//   "https://cdn.prod.website-files.com/624ac40503a527cf47af4192/659baa52498a8bb97b45ed7f_ai-logo-generator-12.png";
-
-const file = "/assets/letra.pdf";
-const type = "pdf";
-
 const onError = (e: any) => {
   console.log(e, "error in file-viewer");
 };
 
-export const FileViewer = () => {
+interface FileViewerProps {
+  file: string;
+  type: string;
+}
+
+export const FileViewer = ({ file, type }: FileViewerProps) => {
   return (
     <Box borderRadius={4} overflow="hidden">
       <Box
