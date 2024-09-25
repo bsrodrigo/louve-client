@@ -37,7 +37,12 @@ export const MusicItemSection = ({
 
   if (type === "link" && link) {
     return (
-      <Box display="flex" alignItems="center" gap={1}>
+      <Box
+        id={`music-section-item-${type}-${documentType}`}
+        display="flex"
+        alignItems="center"
+        gap={1}
+      >
         <Link01Icon />
 
         <Link href={link} target="_blank" rel="noopener noreferrer">
@@ -48,7 +53,7 @@ export const MusicItemSection = ({
   }
 
   return (
-    <Box>
+    <Box id={`music-section-item-${type}-${documentType}`}>
       {type === "audio" && src && (
         <>
           <Typography variant="overline" color="textSecondary">
