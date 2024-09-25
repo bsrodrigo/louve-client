@@ -21,7 +21,7 @@ export const NavBarBrand = ({ isClosed }: NavBarBrandProps): JSX.Element => {
     }
 
     animate(logoRef.current, { width: 0, overflow: "hidden" });
-    animate(LogoWithNameRef.current, { width: 130 }, { delay: 0.1 });
+    animate(LogoWithNameRef.current, { width: 160 }, { delay: 0.1 });
   }, [isClosed]);
 
   return (
@@ -32,10 +32,10 @@ export const NavBarBrand = ({ isClosed }: NavBarBrandProps): JSX.Element => {
         // position={isClosed ? "fixed" : "unset"}
         paddingTop={1}
       >
-        <Logo width={40} />
+        <Logo width={60} />
       </Box>
       <Box ref={LogoWithNameRef} width={isClosed ? 0 : "auto"}>
-        <LogoWithName width={130} />
+        <LogoWithName width={160} />
       </Box>
     </Box>
   );

@@ -73,6 +73,9 @@ export const ThemeProvider = ({ children }: IThemeProvides): JSX.Element => {
         },
       },
       MuiCard: {
+        defaultProps: {
+          elevation: 6,
+        },
         styleOverrides: {
           root: {
             borderRadius: 24,

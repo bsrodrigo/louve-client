@@ -35,39 +35,4 @@ export const menuList: MenuGroup[] = [
       },
     ],
   },
-  {
-    title: "Estoque",
-    items: [
-      {
-        label: "Estoque",
-        redirectTo: "/inventory",
-        Icon: PackageIcon,
-      },
-      {
-        label: "Histórico",
-        redirectTo: "/inventory/history",
-        Icon: InboxCheckIcon,
-      },
-      {
-        label: "Produtos",
-        redirectTo: "/inventory/products",
-        Icon: ShampooIcon,
-      },
-    ],
-  },
-  {
-    title: "Parceiros",
-    items: [
-      {
-        label: "Parceiros",
-        redirectTo: "/partners",
-        Icon: UserGroupIcon,
-      },
-      {
-        label: "Contatos",
-        redirectTo: "/partners/contacts",
-        Icon: ContactIcon,
-      },
-    ],
-  },
 ];

@@ -6,7 +6,7 @@ import {
   useTheme,
 } from "@mui/material";
 
-import { ThemeModeSwitch } from "@/modules/core/components/atoms";
+import { Logo, ThemeModeSwitch } from "@/modules/core/components/atoms";
 
 interface TopBarProps {}
 
@@ -43,11 +43,19 @@ export const TopBar = ({}: TopBarProps): JSX.Element => {
         gap={1}
       >
         <Box padding={1}>
-          <Typography variant="caption">Olá,</Typography>
-          <Typography variant="body2">User name</Typography>
+          <Typography variant="caption">Seja muito,</Typography>
+          <Typography variant="body2">Bem vindo!</Typography>
         </Box>
 
-        <Avatar sx={{ width: 48, height: 48 }} />
+        <Avatar
+          sx={{
+            width: 48,
+            height: 48,
+            bgcolor: theme.palette.background.paper,
+          }}
+        >
+          <Logo width={24} />
+        </Avatar>
       </Box>
     </Box>
   );
