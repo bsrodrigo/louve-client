@@ -1,9 +1,11 @@
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Divider, IconButton, Typography } from "@mui/material";
 
 import { MusicContentSection } from "@/modules/music/components/molecules";
 import { MusicItemSection } from "@/modules/music/components/organisms";
 import { musicKitsData } from "@/modules/music/infra/data";
 import { useParams } from "react-router-dom";
+import { PlayIcon } from "hugeicons-react";
+import { AudioPlayer } from "@/modules/core/components/molecules";
 
 export const MusicDetailsContent = (): JSX.Element => {
   const { id } = useParams();
@@ -39,7 +41,7 @@ export const MusicDetailsContent = (): JSX.Element => {
         ))}
       </MusicContentSection>
 
-      {/* <MusicContentSection title="Kit de voz">
+      <MusicContentSection title="Kit de voz">
         {data?.audioKit?.map((audio, index) => (
           <MusicItemSection
             key={`audio-kit-${index}`}
@@ -48,7 +50,7 @@ export const MusicDetailsContent = (): JSX.Element => {
             src={audio?.src}
           />
         ))}
-      </MusicContentSection> */}
+      </MusicContentSection>
 
       <Divider />
 
