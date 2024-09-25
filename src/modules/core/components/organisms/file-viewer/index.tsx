@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 // @ts-ignore
 import ReactFileViewer from "react-file-viewer";
 
@@ -13,8 +14,28 @@ const onError = (e: any) => {
 
 export const FileViewer = () => {
   return (
-    <div>
-      <ReactFileViewer fileType={type} filePath={file} onError={onError} />
-    </div>
+    <Box borderRadius={4} overflow="hidden">
+      <Box
+        maxHeight="90vh"
+        textAlign="center"
+        overflow="auto"
+        sx={{
+          "& div": {
+            overflow: "hidden",
+            width: "100%",
+          },
+          "& canvas": {
+            width: "100%",
+          },
+        }}
+      >
+        <ReactFileViewer
+          fileType={type}
+          filePath={file}
+          onError={onError}
+          width={100}
+        />
+      </Box>
+    </Box>
   );
 };

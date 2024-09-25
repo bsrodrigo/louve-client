@@ -3859,6 +3859,18 @@ raw-body@2.5.2:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
+react-audio-player-component@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/react-audio-player-component/-/react-audio-player-component-1.2.4.tgz#89bcfa01fc250b14187f154fdda3705dd68b5c56"
+  integrity sha512-bW/mJzFagOzDRJouknPSHEkImwzvKwt0JQBf9nuOQ+tF/MYhwHurNWDoLxAZvhWGGG6dQ9kL2RSFBKsDTa3Irg==
+  dependencies:
+    react-audio-visualize "^1.1.3"
+
+react-audio-visualize@^1.1.3:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-audio-visualize/-/react-audio-visualize-1.2.0.tgz#b53f79223da2e4117ffbb37cdfd5b5ceb1d1dd4e"
+  integrity sha512-rfO5nmT0fp23gjU0y2WQT6+ZOq2ZsuPTMphchwX1PCz1Di4oaIr6x7JZII8MLrbHdG7UB0OHfGONTIsWdh67kQ==
+
 react-data-grid@^5.0.5:
   version "5.0.5"
   resolved "https://registry.yarnpkg.com/react-data-grid/-/react-data-grid-5.0.5.tgz#529f5acd4750ae0461e9da66f9f30d6f597eed76"

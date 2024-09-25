@@ -4,8 +4,10 @@ import { createBrowserRouter } from "react-router-dom";
 import { MenuBar } from "@/modules/core/components/organisms";
 import { partnersRoutes } from "@/modules/partners/routes";
 
-const HomePage = lazy(
-  () => import("@/modules/core/pages/home-page")
+const HomePage = lazy(() => import("@/modules/core/pages/home-page"));
+
+const MusicDetails = lazy(
+  () => import("@/modules/core/pages/music-details-page")
 );
 
 export const router = createBrowserRouter([
@@ -16,8 +18,8 @@ export const router = createBrowserRouter([
       { index: true, element: <HomePage /> },
       ...partnersRoutes,
       {
-        path: "*",
-        element: <div>A página não existe</div>,
+        path: "music-details",
+        element: <MusicDetails />,
       },
     ],
     errorElement: "Error",
