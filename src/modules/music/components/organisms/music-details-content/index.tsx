@@ -39,7 +39,7 @@ export const MusicDetailsContent = (): JSX.Element => {
         ))}
       </MusicContentSection>
 
-      <MusicContentSection title="Kit de voz">
+      {/* <MusicContentSection title="Kit de voz">
         {data?.audioKit?.map((audio, index) => (
           <MusicItemSection
             key={`audio-kit-${index}`}
@@ -48,7 +48,7 @@ export const MusicDetailsContent = (): JSX.Element => {
             src={audio?.src}
           />
         ))}
-      </MusicContentSection>
+      </MusicContentSection> */}
 
       <Divider />
 
