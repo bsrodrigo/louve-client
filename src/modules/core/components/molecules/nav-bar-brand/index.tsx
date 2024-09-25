@@ -1,6 +1,10 @@
-import { Box, useTheme } from "@mui/material";
+import { Box, useColorScheme, useTheme } from "@mui/material";
 
-import { Logo, LogoWithName } from "@/modules/core/components/atoms";
+import {
+  Logo,
+  LogoWithName,
+  LogoWithNameLight,
+} from "@/modules/core/components/atoms";
 import { LegacyRef, SVGProps, useEffect, useRef } from "react";
 import { useAnimate } from "framer-motion";
 
@@ -9,9 +13,11 @@ interface NavBarBrandProps {
 }
 
 export const NavBarBrand = ({ isClosed }: NavBarBrandProps): JSX.Element => {
-  const theme = useTheme();
+  const { mode, systemMode, setMode } = useColorScheme();
   const LogoWithNameRef = useRef(null);
   const [logoRef, animate] = useAnimate();
+
+  const currentMode = mode === "system" ? systemMode : mode;
 
   useEffect(() => {
     if (isClosed) {
@@ -35,7 +41,11 @@ export const NavBarBrand = ({ isClosed }: NavBarBrandProps): JSX.Element => {
         <Logo width={60} />
       </Box>
       <Box ref={LogoWithNameRef} width={isClosed ? 0 : "auto"}>
-        <LogoWithName width={160} />
+        {currentMode === "dark" ? (
+          <LogoWithNameLight width={160} />
+        ) : (
+          <LogoWithName width={160} />
+        )}
       </Box>
     </Box>
   );
