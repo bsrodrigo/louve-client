@@ -48,6 +48,7 @@ export const MusicItemSection = ({
           </Typography>
 
           <AudioPlayer
+            key={`audio-${title}`}
             src={src}
             minimal={true}
             width={
