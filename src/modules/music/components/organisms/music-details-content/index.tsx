@@ -43,39 +43,45 @@ export const MusicDetailsContent = (): JSX.Element => {
         )}
       </Box>
 
-      <MusicContentSection title="Links úteis">
-        {data?.usefulLinks?.map((link, index) => (
-          <MusicItemSection
-            key={`link-kit-${index}`}
-            title={link?.title}
-            link={link?.link}
-            type="link"
-          />
-        ))}
-      </MusicContentSection>
+      {data?.usefulLinks && data.usefulLinks?.length > 0 && (
+        <MusicContentSection title="Links úteis">
+          {data?.usefulLinks?.map((link, index) => (
+            <MusicItemSection
+              key={`link-kit-${index}`}
+              title={link?.title}
+              link={link?.link}
+              type="link"
+            />
+          ))}
+        </MusicContentSection>
+      )}
 
-      <MusicContentSection title="Kit de voz">
-        {data?.audioKit?.map((audio, index) => (
-          <MusicItemSection
-            key={`audio-kit-${index}`}
-            title={audio?.title}
-            type="audio"
-            src={audio?.src}
-          />
-        ))}
-      </MusicContentSection>
+      {data?.audioKit && data.audioKit?.length > 0 && (
+        <MusicContentSection title="Kit de voz">
+          {data?.audioKit?.map((audio, index) => (
+            <MusicItemSection
+              key={`audio-kit-${index}`}
+              title={audio?.title}
+              type="audio"
+              src={audio?.src}
+            />
+          ))}
+        </MusicContentSection>
+      )}
 
-      <MusicContentSection title="Letra">
-        {data?.documents?.map((document, index) => (
-          <MusicItemSection
-            key={`document-kit-${index}`}
-            title={document?.title}
-            type="document"
-            src={document?.src}
-            documentType={document?.fileType}
-          />
-        ))}
-      </MusicContentSection>
+      {data?.documents && data.documents?.length > 0 && (
+        <MusicContentSection title="Letra">
+          {data?.documents?.map((document, index) => (
+            <MusicItemSection
+              key={`document-kit-${index}`}
+              title={document?.title}
+              type="document"
+              src={document?.src}
+              documentType={document?.fileType}
+            />
+          ))}
+        </MusicContentSection>
+      )}
     </Box>
   );
 };
