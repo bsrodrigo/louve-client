@@ -8,8 +8,8 @@ const HomePage = (): JSX.Element => {
   const theme = useTheme();
   const navigate = useNavigate();
 
-  const handleShare = async () => {
-    const shareUrl = "https://louveweb.vercel.app/music-details";
+  const handleShare = async (id: string) => {
+    const shareUrl = `https://louveweb.vercel.app/music-details/${id}`;
     if (navigator.share) {
       try {
         await navigator.share({
@@ -37,7 +37,7 @@ const HomePage = (): JSX.Element => {
     <Box>
       <Header
         title="Congresso 2024"
-        subTitle="Ad Belém - TS / Pq. Pinheiros"
+        subTitle="UMADEBTS / Pq. Pinheiros"
         breadcrumbs={[
           {
             label: "Home",
@@ -81,7 +81,7 @@ const HomePage = (): JSX.Element => {
                     size="large"
                     sx={{ bgcolor: theme.palette.action.hover }}
                     aria-label="Compartilhar"
-                    onClick={handleShare}
+                    onClick={() => handleShare(musicKit?.id || "")}
                   >
                     <Share08Icon />
                   </IconButton>
