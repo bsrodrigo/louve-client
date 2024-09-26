@@ -6,7 +6,7 @@ interface AudioPlayerProps {
   src: string;
   title?: string;
   artist?: string;
-  albumArt?: string; 
+  albumArt?: string;
   noBgColor?: boolean;
 }
 
@@ -58,16 +58,14 @@ export const AudioPlayer = ({
     setProgress(newValue as number);
   };
 
-  // Atualiza a Media Session API quando o áudio é iniciado ou pausado
   useEffect(() => {
+    alert("navigator");
+    if (!("mediaSession" in navigator)) alert("não tem");
     if ("mediaSession" in navigator) {
       navigator.mediaSession.metadata = new MediaMetadata({
         title: title,
         artist: artist,
-        album: "Álbum de Exemplo", // Pode personalizar ou remover se não precisar de álbum
-        artwork: [
-          { src: albumArt, sizes: "512x512", type: "image/jpeg" }, // Imagem da capa do álbum
-        ],
+        artwork: [{ src: albumArt, sizes: "512x512", type: "image/png" }],
       });
 
       navigator.mediaSession.setActionHandler("play", () => {
@@ -102,7 +100,7 @@ export const AudioPlayer = ({
         }
       });
     }
-  }, [title, artist, albumArt]);
+  }, [navigator]);
 
   return (
     <Box
