@@ -1,17 +1,37 @@
-import { Box, Divider, IconButton, Typography } from "@mui/material";
+import { useParams } from "react-router-dom";
+import { collection, addDoc } from "firebase/firestore";
+
+import { Box, Typography } from "@mui/material";
 
 import { MusicContentSection } from "@/modules/music/components/molecules";
 import { MusicItemSection } from "@/modules/music/components/organisms";
 import { musicKitsData } from "@/modules/music/infra/data";
-import { useParams } from "react-router-dom";
-import { PlayIcon } from "hugeicons-react";
-import { AudioPlayer } from "@/modules/core/components/molecules";
+import { MusicKit } from "@/modules/music/models";
+import { useBootstrapContext } from "@/modules/core/contexts/bootstrap";
 
 export const MusicDetailsContent = (): JSX.Element => {
+  const { firestore } = useBootstrapContext();
   const { id } = useParams();
   const data = musicKitsData?.find((musicKit) => musicKit.id === id);
 
-  console.log({ id, data });
+  const teste = async () => {
+    try {
+      if (!data) return;
+
+      const dataAdd: MusicKit = {
+        name: data.name,
+        artist: data?.artist || "",
+        originalSound: data?.originalSound || "",
+        audioKit: data?.audioKit || [],
+        documents: data?.documents || [],
+      };
+      console.log("dataAdd", dataAdd);
+      const docRef = await addDoc(collection(firestore, "supportKit"), dataAdd);
+      console.log("Document written with ID: ", docRef?.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  };
 
   if (!data?.id) {
     return (

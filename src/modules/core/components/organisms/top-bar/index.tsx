@@ -7,14 +7,18 @@ import {
 } from "@mui/material";
 
 import { Logo, ThemeModeSwitch } from "@/modules/core/components/atoms";
+import { useAuthContext } from "@/modules/auth/context/auth-context";
+import { UserDropdown } from "@/modules/core/components/organisms";
 
 interface TopBarProps {}
 
 export const TopBar = ({}: TopBarProps): JSX.Element => {
   const theme = useTheme();
+  const { user } = useAuthContext();
   const { mode, systemMode, setMode } = useColorScheme();
 
   const currentMode = mode === "system" ? systemMode : mode;
+  const firstName = user?.displayName?.split(" ")[0];
 
   return (
     <Box
@@ -33,30 +37,7 @@ export const TopBar = ({}: TopBarProps): JSX.Element => {
         />
       </Box>
 
-      <Box
-        display="flex"
-        alignItems="center"
-        borderRadius={8}
-        height={64}
-        bgcolor={theme.palette.background.paper}
-        padding={1}
-        gap={1}
-      >
-        <Box padding={1}>
-          <Typography variant="caption">Seja muito,</Typography>
-          <Typography variant="body2">Bem vindo!</Typography>
-        </Box>
-
-        <Avatar
-          sx={{
-            width: 48,
-            height: 48,
-            bgcolor: theme.palette.background.paper,
-          }}
-        >
-          <Logo width={24} />
-        </Avatar>
-      </Box>
+      <UserDropdown />
     </Box>
   );
 };

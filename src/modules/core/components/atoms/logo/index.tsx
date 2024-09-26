@@ -9,7 +9,6 @@ export const Logo = ({
   return (
     <svg
       width={width}
-      height="98"
       viewBox="0 0 75 98"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

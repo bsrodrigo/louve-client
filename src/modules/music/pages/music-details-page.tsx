@@ -16,6 +16,7 @@ const MusicDetails = (): JSX.Element => {
           { label: "Kit de apoio " },
         ]}
       />
+
       <MusicDetailsContent />
     </Box>
   );

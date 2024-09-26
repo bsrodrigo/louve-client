@@ -38,6 +38,7 @@ export const musicKitsData: MusicKit[] = [
       },
     ],
   },
+
   {
     id: "00000002",
     name: "Assenta-te no trono",
@@ -50,7 +51,6 @@ export const musicKitsData: MusicKit[] = [
         fileType: "pdf",
       },
     ],
-
     usefulLinks: [
       {
         title: "Música original Youtube",
@@ -58,6 +58,7 @@ export const musicKitsData: MusicKit[] = [
       },
     ],
   },
+
   {
     id: "00000003",
     name: "A Boa Parte",
@@ -76,5 +77,46 @@ export const musicKitsData: MusicKit[] = [
         link: "https://www.youtube.com/watch?v=dlGOiuxSzVw",
       },
     ],
+    // TODO avaliar mudança de estrutura
+    // kitGroups: [
+    //   {
+    //     title: "Links úteis",
+    //     kitItems: [
+    //       {
+    //         type: "link",
+    //         title: "Música original Youtube",
+    //         link: "https://www.youtube.com/watch?v=dlGOiuxSzVw",
+    //       },
+    //     ],
+    //   },
+    //   {
+    //     title: "Kit de voz",
+    //     order: 2,
+    //     kitItems: [
+    //       {
+    //         type: "audio",
+    //         title: "Soprano",
+    //         author: "Marta Gussoni",
+    //         src: "assets/sounds/m3-soprano.m4a",
+    //       },
+    //       {
+    //         type: "audio",
+    //         title: "Contralto",
+    //         src: "assets/sounds/m3-contralto.m4a",
+    //       },
+    //     ],
+    //   },
+    //   {
+    //     title: "Letra",
+    //     order: 3,
+    //     kitItems: [
+    //       {
+    //         type: "file",
+    //         src: "/assets/documents/m3-lyrics.pdf",
+    //         openFile: true,
+    //       },
+    //     ],
+    //   }
+    // ],
   },
 ];
