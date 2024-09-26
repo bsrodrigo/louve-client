@@ -2,7 +2,15 @@ import React, { useState, useRef, useEffect } from "react";
 import { Box, IconButton, Slider, Typography, useTheme } from "@mui/material";
 import { PauseIcon, PlayIcon } from "hugeicons-react";
 
-export const AudioPlayer: React.FC<{ src: string }> = ({ src }) => {
+interface AudioPlayerProps {
+  src: string;
+  noBgColor?: boolean;
+}
+
+export const AudioPlayer = ({
+  src,
+  noBgColor,
+}: AudioPlayerProps): JSX.Element => {
   const theme = useTheme();
 
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -48,9 +56,9 @@ export const AudioPlayer: React.FC<{ src: string }> = ({ src }) => {
     <Box
       display="flex"
       alignItems="center"
-      bgcolor={theme.palette.background.default}
+      bgcolor={noBgColor ? "none" : theme.palette.background.default}
       borderRadius={2}
-      padding={1}
+      padding={theme.spacing(1, 3)}
       width="100%"
     >
       <IconButton onClick={togglePlayPause}>

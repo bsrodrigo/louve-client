@@ -23,17 +23,21 @@ export const MusicDetailsContent = (): JSX.Element => {
 
   return (
     <Box display="flex" flexDirection="column" gap={4}>
-      <Box>
-        <Typography variant="overline" color="textSecondary">
-          <b>Música</b>
-        </Typography>
-        <Typography variant="h4">{data?.name}</Typography>
-        <MusicItemSection
-          key="audio-kit-original"
-          title="Original"
-          type="audio"
-          src={data?.originalSound}
-        />
+      <Box display="flex" flexDirection="column" gap={2} marginBottom={3}>
+        <Box>
+          <Typography variant="h4">{data?.name}</Typography>
+          <Typography variant="h6" color="textSecondary">
+            {data?.artist}
+          </Typography>
+        </Box>
+
+        {data?.originalSound && (
+          <MusicItemSection
+            key="audio-original"
+            type="audio"
+            src={data?.originalSound}
+          />
+        )}
       </Box>
 
       <MusicContentSection title="Links úteis">
@@ -57,8 +61,6 @@ export const MusicDetailsContent = (): JSX.Element => {
           />
         ))}
       </MusicContentSection>
-
-      <Divider />
 
       <MusicContentSection title="Letra">
         {data?.documents?.map((document, index) => (

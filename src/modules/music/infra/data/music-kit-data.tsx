@@ -3,7 +3,8 @@ import { MusicKit } from "@/modules/music/models";
 export const musicKitsData: MusicKit[] = [
   {
     id: "00000001",
-    name: "Tu és poderoso + Vida aos sepulcros",
+    name: "Tu és poderoso + Vida aos sepulcros (Medley)",
+    artist: "Ello Eterno - AD Brás",
     originalSound: "assets/sounds/m1-original.mp3",
     audioKit: [
       {
@@ -26,44 +27,54 @@ export const musicKitsData: MusicKit[] = [
     documents: [
       {
         title: "Letra",
-        src: "/assets/letra.pdf",
+        src: "/assets/documents/m1-lyrics.pdf",
         fileType: "pdf",
       },
     ],
     usefulLinks: [
       {
-        title: "Louvor original Youtube",
+        title: "Música original Youtube",
         link: "https://www.youtube.com/watch?v=sgaw6G7r1lE",
       },
     ],
   },
+  {
+    id: "00000002",
+    name: "Assenta-te no trono",
+    artist: "Coral Resgate",
+    originalSound: "assets/sounds/m2-original.mp3",
+    documents: [
+      {
+        title: "Letra",
+        src: "/assets/documents/m2-lyrics.pdf",
+        fileType: "pdf",
+      },
+    ],
 
-  // {
-  //   id: "00000002",
-  //   name: "Assenta-te no trono",
-  //   originalSound: "assets/music.mp3",
-  //   audioKit: [
-  //     {
-  //       title: "Tenor",
-  //       src: "assets/music.mp3",
-  //     },
-  //     {
-  //       title: "Soprano",
-  //       src: "assets/music.mp3",
-  //     },
-  //   ],
-  //   documents: [
-  //     {
-  //       title: "Letra",
-  //       src: "/assets/letra.pdf",
-  //       fileType: "pdf",
-  //     },
-  //   ],
-  //   usefulLinks: [
-  //     {
-  //       title: "Cifra",
-  //       link: "https://www.cifraclub.com.br",
-  //     },
-  //   ],
-  // },
+    usefulLinks: [
+      {
+        title: "Música original Youtube",
+        link: "https://www.youtube.com/watch?v=n51PMIaoZNM",
+      },
+    ],
+  },
+  {
+    id: "00000003",
+    name: "A Boa Parte",
+    artist: "Phop music, part. Nívea Soares",
+    originalSound: "assets/sounds/m3-original.mp3",
+    documents: [
+      {
+        title: "Letra",
+        src: "/assets/documents/m3-lyrics.pdf",
+        fileType: "pdf",
+      },
+    ],
+    usefulLinks: [
+      {
+        title: "Música original Youtube",
+        link: "https://www.youtube.com/watch?v=dlGOiuxSzVw",
+      },
+    ],
+  },
 ];

@@ -17,6 +17,7 @@ export interface UsefulLinksItem {
 export interface MusicKit {
   id?: string;
   name: string;
+  artist?: string;
   originalSound?: string;
   audioKit?: MusicAudioItem[];
   documents?: MusicKitDocumentItem[];

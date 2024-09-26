@@ -7,13 +7,13 @@ const MusicDetails = (): JSX.Element => {
   return (
     <Box>
       <Header
-        title="Kit da música"
+        title="Kit de apoio"
         breadcrumbs={[
           {
             label: "Home",
             redirectTo: "/",
           },
-          { label: "Kit da música " },
+          { label: "Kit de apoio " },
         ]}
       />
       <MusicDetailsContent />

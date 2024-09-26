@@ -12,11 +12,12 @@ import {
 import { AudioPlayer, FileViewer } from "@/modules/core/components/molecules";
 
 export interface MusicItemSectionProps {
-  title: string;
+  title?: string;
   src?: string;
   documentType?: string;
   type?: "audio" | "document" | "link";
   link?: string;
+  noBgColorAudioPlayer?: string;
 }
 
 export const MusicItemSection = ({
@@ -28,7 +29,19 @@ export const MusicItemSection = ({
 }: MusicItemSectionProps): JSX.Element => {
   const theme = useTheme();
 
-  console.log({ title, link, src, documentType, type });
+  const handleDownload = () => {
+    if (!src) {
+      alert("Arquivo não encontrado");
+      return;
+    }
+
+    const link = document.createElement("a");
+    link.href = src;
+    link.download = title || "file-downloaded";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   if (!src && !link) {
     return <></>;
@@ -45,7 +58,7 @@ export const MusicItemSection = ({
         <Link01Icon />
 
         <Link href={link} target="_blank" rel="noopener noreferrer">
-          {title}
+          {title || link}
         </Link>
       </Box>
     );
@@ -55,9 +68,12 @@ export const MusicItemSection = ({
     <Box id={`music-section-item-${type}-${documentType}`} width="100%">
       {type === "audio" && src && (
         <>
-          <Typography variant="overline" color="textSecondary">
-            {title}
-          </Typography>
+          {title && (
+            <Typography variant="overline" color="textSecondary">
+              {title}
+            </Typography>
+          )}
+
           <Box
             display="flex"
             alignItems="center"
@@ -71,53 +87,11 @@ export const MusicItemSection = ({
               aria-label="download"
               size="large"
               color="primary"
-              onClick={() => {
-                const link = document.createElement("a");
-                link.href = src;
-                link.download = title;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-              }}
+              onClick={handleDownload}
             >
               <CloudDownloadIcon />
             </IconButton>
           </Box>
-
-          {/* TODO rever necessidade da lib */}
-          {/* <AudioPlayer
-            onloadstart={(event) => {
-              setLoading(true);
-              console.log("onloadstart", { event });
-            }}
-            onloadedmetadata={(event) => {
-              setLoading(false);
-              console.log("onloadedmetadata", { event });
-            }}
-            onwaiting={(event) => {
-              console.log("onwaiting", { event });
-            }}
-            key={`audio-${title}`}
-            src={src}
-            minimal={true}
-            width={
-              window.innerWidth > 600
-                ? window.innerWidth * 0.5
-                : window.innerWidth - 80
-            }
-            trackHeight={40}
-            barWidth={3}
-            gap={1}
-            visualise={true}
-            backgroundColor={theme.palette.background.default}
-            barColor={theme.palette.primary.main}
-            barPlayedColor={theme.palette.primary.dark}
-            skipDuration={2}
-            showLoopOption={true}
-            showVolumeControl={true}
-            hideSeekBar={true}
-            hideSeekKnobWhenPlaying={true}
-          /> */}
         </>
       )}
 
@@ -129,14 +103,7 @@ export const MusicItemSection = ({
               aria-label="download"
               size="large"
               color="primary"
-              onClick={() => {
-                const link = document.createElement("a");
-                link.href = src;
-                link.download = title;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-              }}
+              onClick={handleDownload}
             >
               Baixar
             </Button>
