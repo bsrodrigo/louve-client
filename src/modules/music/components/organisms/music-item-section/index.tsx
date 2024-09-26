@@ -96,20 +96,32 @@ export const MusicItemSection = ({
       )}
 
       {type === "document" && src && documentType && (
-        <Container sx={{ padding: "0 !important", margin: 0 }} maxWidth="lg">
-          <Box display="flex" alignItems="center" justifyContent="flex-end">
-            <Button
-              endIcon={<CloudDownloadIcon />}
-              aria-label="download"
-              size="large"
-              color="primary"
-              onClick={handleDownload}
+        <Box
+          bgcolor={theme.palette.background.default}
+          borderRadius={4}
+          paddingTop={2}
+          paddingBottom={2}
+        >
+          <Container sx={{ padding: "0 !important" }} maxWidth="lg">
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="flex-end"
+              paddingRight={2}
             >
-              Baixar
-            </Button>
-          </Box>
-          <FileViewer file={src} type={documentType} />
-        </Container>
+              <Button
+                endIcon={<CloudDownloadIcon />}
+                aria-label="download"
+                size="large"
+                color="primary"
+                onClick={handleDownload}
+              >
+                Baixar
+              </Button>
+            </Box>
+            <FileViewer file={src} type={documentType} />
+          </Container>
+        </Box>
       )}
     </Box>
   );
