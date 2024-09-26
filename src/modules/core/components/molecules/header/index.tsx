@@ -8,13 +8,26 @@ interface HeaderBreadcrumbsProps {
 
 export interface HeaderProps {
   title: string;
+  subTitle?: string;
   breadcrumbs: HeaderBreadcrumbsProps[];
 }
 
-export const Header = ({ title, breadcrumbs }: HeaderProps): JSX.Element => {
+export const Header = ({
+  title,
+  subTitle,
+  breadcrumbs,
+}: HeaderProps): JSX.Element => {
   return (
-    <Box marginBottom={5}>
-      <Typography variant="h4">{title}</Typography>
+    <Box display="flex" flexDirection="column" gap={1} marginBottom={5}>
+      <Box>
+        <Typography variant="h4">{title}</Typography>
+        {subTitle && (
+          <Typography variant="body1" fontWeight={500} color="textSecondary">
+            {subTitle}
+          </Typography>
+        )}
+      </Box>
+
       <Box>
         <Breadcrumbs separator="›">
           {breadcrumbs.map(({ label, redirectTo }, index) =>

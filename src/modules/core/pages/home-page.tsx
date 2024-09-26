@@ -37,6 +37,7 @@ const HomePage = (): JSX.Element => {
     <Box>
       <Header
         title="Congresso 2024"
+        subTitle="Ad Belém - TS / Pq. Pinheiros"
         breadcrumbs={[
           {
             label: "Home",
@@ -59,9 +60,15 @@ const HomePage = (): JSX.Element => {
               <Box display="flex" flexDirection="column" gap={4}>
                 <Box>
                   <Typography variant="h6">{musicKit?.name}</Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    Atualizado em: 25/09/2024
-                  </Typography>
+                  {musicKit?.artist && (
+                    <Typography
+                      variant="body1"
+                      color="textSecondary"
+                      fontWeight={700}
+                    >
+                      {musicKit.artist}
+                    </Typography>
+                  )}
                 </Box>
                 <Box
                   display="flex"
