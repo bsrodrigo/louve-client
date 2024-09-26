@@ -34,8 +34,11 @@ export const MusicDetailsContent = (): JSX.Element => {
         {data?.originalSound && (
           <MusicItemSection
             key="audio-original"
-            type="audio"
+            title={data?.name}
+            artist={data?.artist}
             src={data?.originalSound}
+            type="audio"
+            hideTitle
           />
         )}
       </Box>

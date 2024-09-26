@@ -14,18 +14,22 @@ import { AudioPlayer, FileViewer } from "@/modules/core/components/molecules";
 export interface MusicItemSectionProps {
   title?: string;
   src?: string;
+  artist?: string;
   documentType?: string;
   type?: "audio" | "document" | "link";
   link?: string;
   noBgColorAudioPlayer?: string;
+  hideTitle?: boolean;
 }
 
 export const MusicItemSection = ({
   title,
   link,
   src,
+  artist,
   documentType,
   type,
+  hideTitle,
 }: MusicItemSectionProps): JSX.Element => {
   const theme = useTheme();
 
@@ -68,7 +72,7 @@ export const MusicItemSection = ({
     <Box id={`music-section-item-${type}-${documentType}`} width="100%">
       {type === "audio" && src && (
         <>
-          {title && (
+          {title && !hideTitle && (
             <Typography variant="overline" color="textSecondary">
               {title}
             </Typography>
@@ -81,7 +85,7 @@ export const MusicItemSection = ({
             maxWidth={840}
             width="100%"
           >
-            <AudioPlayer src={src} />
+            <AudioPlayer title={title} artist={artist} src={src} />
 
             <IconButton
               aria-label="download"

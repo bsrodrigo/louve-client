@@ -4,11 +4,17 @@ import { PauseIcon, PlayIcon } from "hugeicons-react";
 
 interface AudioPlayerProps {
   src: string;
+  title?: string;
+  artist?: string;
+  albumArt?: string; 
   noBgColor?: boolean;
 }
 
 export const AudioPlayer = ({
   src,
+  title = "Tocando de Louve Web",
+  artist = "Desconhecido",
+  albumArt = "/assets/logo.png",
   noBgColor,
 }: AudioPlayerProps): JSX.Element => {
   const theme = useTheme();
@@ -51,6 +57,52 @@ export const AudioPlayer = ({
     audio.currentTime = newTime;
     setProgress(newValue as number);
   };
+
+  // Atualiza a Media Session API quando o áudio é iniciado ou pausado
+  useEffect(() => {
+    if ("mediaSession" in navigator) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: title,
+        artist: artist,
+        album: "Álbum de Exemplo", // Pode personalizar ou remover se não precisar de álbum
+        artwork: [
+          { src: albumArt, sizes: "512x512", type: "image/jpeg" }, // Imagem da capa do álbum
+        ],
+      });
+
+      navigator.mediaSession.setActionHandler("play", () => {
+        if (audioRef.current) {
+          audioRef.current.play();
+          setIsPlaying(true);
+        }
+      });
+
+      navigator.mediaSession.setActionHandler("pause", () => {
+        if (audioRef.current) {
+          audioRef.current.pause();
+          setIsPlaying(false);
+        }
+      });
+
+      navigator.mediaSession.setActionHandler("seekbackward", () => {
+        if (audioRef.current) {
+          audioRef.current.currentTime = Math.max(
+            audioRef.current.currentTime - 10,
+            0
+          );
+        }
+      });
+
+      navigator.mediaSession.setActionHandler("seekforward", () => {
+        if (audioRef.current) {
+          audioRef.current.currentTime = Math.min(
+            audioRef.current.currentTime + 10,
+            audioRef.current.duration
+          );
+        }
+      });
+    }
+  }, [title, artist, albumArt]);
 
   return (
     <Box
