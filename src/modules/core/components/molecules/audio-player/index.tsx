@@ -58,10 +58,10 @@ export const AudioPlayer = ({
       alignItems="center"
       bgcolor={noBgColor ? "none" : theme.palette.background.default}
       borderRadius={2}
-      padding={theme.spacing(1, 3)}
+      padding={theme.spacing(1)}
       width="100%"
     >
-      <IconButton onClick={togglePlayPause}>
+      <IconButton onClick={togglePlayPause} size="small">
         {isPlaying ? <PauseIcon /> : <PlayIcon />}
       </IconButton>
       <Slider

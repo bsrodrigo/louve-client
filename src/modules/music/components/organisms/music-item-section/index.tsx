@@ -85,7 +85,7 @@ export const MusicItemSection = ({
 
             <IconButton
               aria-label="download"
-              size="large"
+              size="small"
               color="primary"
               onClick={handleDownload}
             >
