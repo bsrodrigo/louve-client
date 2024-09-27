@@ -14,6 +14,7 @@ import {
 import {
   LogoWithName,
   LogoWithNameLight,
+  PasswordTextField,
 } from "@/modules/core/components/atoms";
 import { useAuthContext } from "@/modules/auth/context/auth-context";
 
@@ -86,8 +87,8 @@ const RegisterPage = (): JSX.Element => {
             </Box>
           </Box>
 
-          <Box display="flex" flexDirection="column" gap={3}>
-            <Typography variant="h5" component="div" color="textSecondary">
+          <Box display="flex" flexDirection="column" gap={2}>
+            <Typography variant="h5" component="div">
               Cadastro
             </Typography>
 
@@ -97,7 +98,7 @@ const RegisterPage = (): JSX.Element => {
               onChange={(e) => setName(e.target.value)}
               label="Nome"
               variant="outlined"
-              placeholder="Como você quer ser chamado?"
+              placeholder="Nome e sobrenome"
               fullWidth
             />
             <TextField
@@ -106,6 +107,7 @@ const RegisterPage = (): JSX.Element => {
               onChange={(e) => setEmail(e.target.value)}
               label="Email"
               variant="outlined"
+              placeholder="email@exemplo.com"
               fullWidth
             />
             <TextField
@@ -115,17 +117,19 @@ const RegisterPage = (): JSX.Element => {
               label="Password"
               type="password"
               variant="outlined"
+              placeholder="**********"
               fullWidth
             />
-            <TextField
+            <PasswordTextField
               name="confirmPassword"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               label="Confirme a senha"
-              type="password"
               variant="outlined"
+              placeholder="**********"
               fullWidth
             />
+
             <Button
               variant="outlined"
               color="primary"
@@ -137,6 +141,16 @@ const RegisterPage = (): JSX.Element => {
               Cadastrar
             </Button>
           </Box>
+
+          <Button
+            variant="text"
+            color="primary"
+            size="large"
+            onClick={() => navigate("/auth")}
+            disabled={loading}
+          >
+            Fazer login
+          </Button>
         </Box>
       </Paper>
     </Box>

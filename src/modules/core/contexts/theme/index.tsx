@@ -1,6 +1,7 @@
 import {
   createTheme,
   ThemeProvider as MuiThemeProvider,
+  outlinedInputClasses,
   Shadows,
   useTheme,
 } from "@mui/material";
@@ -105,11 +106,37 @@ export const ThemeProvider = ({ children }: IThemeProvides): JSX.Element => {
         },
       },
       MuiTextField: {
+        defaultProps: {
+          slotProps: {
+            inputLabel: {
+              shrink: true,
+            },
+          },
+        },
         styleOverrides: {
           root: {
+            "--TextField-brandBorderColor": "#B2BAC2",
+            "--TextField-brandBorderHoverColor": "#B2BAC2",
+            "--TextField-brandBorderFocusedColor": "#2593E6",
             "& .MuiInputBase-root": {
-              borderRadius: 12,
+              borderRadius: 16,
               height: 56,
+            },
+          },
+        },
+      },
+      MuiOutlinedInput: {
+        styleOverrides: {
+          notchedOutline: {
+            borderColor: "var(--TextField-brandBorderColor)",
+          },
+          root: {
+            [`&:hover .${outlinedInputClasses.notchedOutline}`]: {
+              border: "2px solid",
+              borderColor: "var(--TextField-brandBorderHoverColor)",
+            },
+            [`&.Mui-focused .${outlinedInputClasses.notchedOutline}`]: {
+              borderColor: "var(--TextField-brandBorderFocusedColor)",
             },
           },
         },

@@ -14,6 +14,7 @@ import {
 import {
   LogoWithName,
   LogoWithNameLight,
+  PasswordTextField,
 } from "@/modules/core/components/atoms";
 import { useAuthContext } from "@/modules/auth/context/auth-context";
 
@@ -51,7 +52,7 @@ const LoginPage = (): JSX.Element => {
       alignItems="center"
       height="100vh"
       width="100%"
-      margin={1}
+      padding={1}
     >
       <Paper>
         <Box
@@ -86,12 +87,11 @@ const LoginPage = (): JSX.Element => {
               fullWidth
               margin="normal"
             />
-            <TextField
+            <PasswordTextField
               name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               label="Password"
-              type="password"
               variant="outlined"
               fullWidth
               margin="normal"
@@ -108,6 +108,16 @@ const LoginPage = (): JSX.Element => {
               Entrar
             </Button>
           </Box>
+
+          <Button
+            variant="text"
+            color="primary"
+            size="large"
+            onClick={() => navigate("/auth/register")}
+            disabled={loading}
+          >
+            Criar conta
+          </Button>
         </Box>
       </Paper>
     </Box>
