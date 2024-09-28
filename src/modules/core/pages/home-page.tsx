@@ -40,10 +40,10 @@ const HomePage = (): JSX.Element => {
 
         <Box textAlign="center">
           <Typography variant="body1">
-            Huumm... Parece que você ainda não está e nenhum grupo
+            Huumm... Parece que você ainda não está em nenhum grupo
           </Typography>
           <Typography variant="body1">
-            Que tal você criar um grupo pra gente começar a cantar por aí?
+            Que tal criar um grupo pra gente começar a cantar por aí?
           </Typography>
         </Box>
 
