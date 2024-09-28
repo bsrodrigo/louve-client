@@ -31,7 +31,7 @@ export const GroupProvider = ({
         return;
       }
 
-      const member: GroupMember = { id: user.id, permission: ["EDITOR"] };
+      const member: GroupMember = { id: user.id, permission: ["ADMIN"] };
 
       const group = await createGroupService({
         ...data,

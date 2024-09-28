@@ -1,4 +1,4 @@
-export type GroupPermissionTypes = "EDITOR" | "READER";
+export type GroupPermissionTypes = "ADMIN" | "EDITOR";
 
 export interface GroupMember {
   id: string;
