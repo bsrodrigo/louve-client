@@ -8,10 +8,15 @@ import {
   UserIcon,
 } from "hugeicons-react";
 import { useNavigate } from "react-router-dom";
+import { GroupProvider } from "@/modules/group/context/group-context";
+import { GroupForm } from "@/modules/group/components/organisms";
+import { useState } from "react";
 
 const HomePage = (): JSX.Element => {
   const theme = useTheme();
   const navigate = useNavigate();
+
+  const [open, setOpen] = useState(false);
 
   return (
     <Box>
@@ -31,9 +36,6 @@ const HomePage = (): JSX.Element => {
         width="100%"
         gap={2}
       >
-        {/* <Typography variant="h4" color={theme.palette.grey[500]}>
-          Seja muito bem vindo!
-        </Typography> */}
         <Box maxWidth={700}>
           <RenderSvg type="SINGING_BIRD" />
         </Box>
@@ -62,17 +64,16 @@ const HomePage = (): JSX.Element => {
             variant="contained"
             color="primary"
             startIcon={<UserGroupIcon />}
-            onClick={() =>
-              alert(
-                "Isso ainda está em desenvolvimento :( \nPor enquanto você pode acessar as músicas demos, que são as músicas do congresso da UMADEBTS - Pq. Pinheiros"
-              )
-            }
+            onClick={() => setOpen(true)}
             size="large"
             fullWidth
           >
             Criar um grupo
           </Button>
         </Box>
+        <GroupProvider>
+          <GroupForm open={open} onClose={() => setOpen(false)} />
+        </GroupProvider>
       </Box>
     </Box>
   );

@@ -7,19 +7,15 @@ import {
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 
 import { User } from "@/modules/auth/models";
-import { initializeApp } from "firebase/app";
-import { firebaseConfig } from "@/modules/core/infra/api/firestore";
-
-initializeApp(firebaseConfig);
-
-const auth = getAuth();
-const db = getFirestore();
 
 export const createUserService = async (
   email: string,
   password: string,
   name: string
 ): Promise<User> => {
+  const auth = getAuth();
+  const db = getFirestore();
+
   const userCredential = await createUserWithEmailAndPassword(
     auth,
     email,
@@ -57,6 +53,9 @@ export const getLoginService = async (
   email: string,
   password: string
 ): Promise<User> => {
+  const auth = getAuth();
+  const db = getFirestore();
+
   const userCredential = await signInWithEmailAndPassword(
     auth,
     email,
@@ -81,10 +80,15 @@ export const getLoginService = async (
 };
 
 export const logoutService = async (): Promise<void> => {
+  const auth = getAuth();
+  const db = getFirestore();
+
   await auth.signOut();
 };
 
 export const getUserService = async (id: string): Promise<User> => {
+  const db = getFirestore();
+
   const userDoc = await getDoc(doc(db, "users", id));
 
   if (!userDoc.exists()) {
@@ -102,6 +106,8 @@ export const getUserService = async (id: string): Promise<User> => {
 };
 
 export const observerAuthService = (callback: (user: User | null) => void) => {
+  const auth = getAuth();
+
   auth.onAuthStateChanged(async (user) => {
     if (!user?.uid) {
       callback(null);

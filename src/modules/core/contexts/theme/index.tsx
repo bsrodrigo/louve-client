@@ -120,7 +120,6 @@ export const ThemeProvider = ({ children }: IThemeProvides): JSX.Element => {
             "--TextField-brandBorderFocusedColor": "#2593E6",
             "& .MuiInputBase-root": {
               borderRadius: 16,
-              height: 56,
             },
           },
         },

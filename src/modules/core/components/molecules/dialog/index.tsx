@@ -64,11 +64,9 @@ export const Dialog: React.FC<IDialog> = ({
   return (
     <DialogBaseStyled styledMaxWidth={maxWidth} open={open}>
       <DialogTitle>
-        <Typography variant="h6" color={theme.palette.grey[800]}>
-          {title}
-        </Typography>
+        <Typography variant="h6">{title}</Typography>
         {subtitle && (
-          <Typography variant="body1" color={theme.palette.grey[800]}>
+          <Typography variant="body1" color={theme.palette.grey[600]}>
             {subtitle}
           </Typography>
         )}

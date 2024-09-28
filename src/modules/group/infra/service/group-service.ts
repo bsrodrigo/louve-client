@@ -1,18 +1,39 @@
-import { collection, doc, getFirestore, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  getFirestore,
+  setDoc,
+  Timestamp,
+} from "firebase/firestore";
+import { Group } from "@/modules/group/models";
 
-import { GroupResponse } from "@/modules/group/infra/types";
-
-export const createGroupService = async () => {
+export const createGroupService = async (group: Group): Promise<Group> => {
   const db = getFirestore();
-  const data: GroupResponse = {
-    name: "Group 1",
-    description: "Description 1",
-    members: [],
-    musicKitsFolders: [],
-    createdAt: new Date(),
-  };
 
-  const newGroupRef = doc(collection(db, "groups")); // Cria uma referência com ID único
-  const group = await setDoc(newGroupRef, { ...data, id: newGroupRef.id });
-  console.log({ newGroupRef, group });
+  const createdAt = Timestamp.now();
+  const data = { ...group, createdAt };
+
+  const newGroupRef = doc(collection(db, "groups"));
+  await setDoc(newGroupRef, { ...data, id: newGroupRef.id });
+
+  return {
+    ...group,
+    id: newGroupRef.id,
+    createdAt: createdAt.toDate(),
+  } as Group;
+};
+
+export const getGroupsService = async (): Promise<Group[]> => {
+  const db = getFirestore();
+  const groupsCollection = collection(db, "groups");
+  const groupsSnapshot = await getDocs(groupsCollection);
+
+  const groups: Group[] = [];
+  groupsSnapshot.forEach((doc) => {
+    const group = doc.data() as Group;
+    groups.push(group);
+  });
+
+  return groups;
 };

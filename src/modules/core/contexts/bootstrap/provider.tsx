@@ -16,7 +16,7 @@ interface BootstrapProviderProps {
 export const BootstrapProvider = ({
   children,
 }: BootstrapProviderProps): JSX.Element => {
-  const [firebaseApp, setFirebaseApp] = useState<FirebaseApp>(null!);
+  const firebaseApp = initializeApp(firebaseConfig);
   const [analytics, setAnalytics] = useState<Analytics>(null!);
   const [firestore, setFirestore] = useState<Firestore>(null!);
 
@@ -26,12 +26,9 @@ export const BootstrapProvider = ({
     const load = async () => {
       try {
         setPageLoading(true);
-        const firebaseAppLoaded = await initializeApp(firebaseConfig);
-        console.log({ firebaseAppLoaded });
-        const analyticsLoaded = await getAnalytics(firebaseAppLoaded);
-        const firestoreDbLoaded = await getFirestore(firebaseAppLoaded);
+        const analyticsLoaded = await getAnalytics(firebaseApp);
+        const firestoreDbLoaded = await getFirestore(firebaseApp);
 
-        setFirebaseApp(firebaseAppLoaded);
         setAnalytics(analyticsLoaded);
         setFirestore(firestoreDbLoaded);
       } catch (error) {

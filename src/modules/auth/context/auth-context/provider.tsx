@@ -1,5 +1,6 @@
 import { ReactNode, useEffect, useReducer, useState } from "react";
 
+import { useBootstrapContext } from "@/modules/core/contexts/bootstrap";
 import { LoadingContent } from "@/modules/core/components/molecules";
 import {
   createUserService,
@@ -10,7 +11,6 @@ import {
 
 import { ActionTypes, initialState, reducer } from "./reducer";
 import { authContext } from "./context";
-import { useBootstrapContext } from "@/modules/core/contexts/bootstrap";
 interface AuthProviderProps {
   children: ReactNode;
 }
@@ -39,8 +39,6 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
 
     loadAuth();
   }, []);
-
-  console.log({ pageLoadingAuth: pageLoading });
 
   const createUser = async (email: string, password: string, name: string) => {
     try {
