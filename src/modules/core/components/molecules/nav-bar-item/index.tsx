@@ -13,6 +13,7 @@ interface NavBarItemProps {
   redirectTo: string;
   isClosed?: boolean;
   isActive?: boolean;
+  isDisabled?: boolean;
   onClick?: () => void;
 }
 
@@ -22,6 +23,7 @@ export const NavBarItem = ({
   redirectTo,
   isClosed,
   isActive,
+  isDisabled,
   onClick,
 }: NavBarItemProps): JSX.Element => {
   const theme = useTheme();
@@ -29,6 +31,10 @@ export const NavBarItem = ({
   const [scope, animate] = useAnimate();
 
   const handleOnClick = () => {
+    if (isDisabled) {
+      return;
+    }
+
     if (onClick) {
       onClick();
     }
@@ -45,7 +51,10 @@ export const NavBarItem = ({
     animate(scope.current, { width: "100%" });
   }, [isClosed]);
 
-  const color = isActive ? theme.palette.primary.main : theme.palette.grey[600];
+  const defaultColor = isActive
+    ? theme.palette.primary.main
+    : theme.palette.grey[600];
+  const color = isDisabled ? theme.palette.text.disabled : defaultColor;
 
   return (
     <NavBarItemBox
@@ -60,7 +69,7 @@ export const NavBarItem = ({
       <Typography
         ref={scope}
         variant="button"
-        color={color}
+        color={isDisabled ? theme.palette.text.disabled : color}
         width={isClosed ? 0 : "100%"}
         overflow="hidden"
       >

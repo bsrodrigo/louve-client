@@ -1,4 +1,4 @@
-import { Box, Breadcrumbs, Link as MuiLink, Typography } from "@mui/material";
+import { Box, Breadcrumbs, Link as MuiLink, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 
 interface HeaderBreadcrumbsProps {
@@ -7,7 +7,7 @@ interface HeaderBreadcrumbsProps {
 }
 
 export interface HeaderProps {
-  title: string;
+  title?: string;
   subTitle?: string;
   breadcrumbs: HeaderBreadcrumbsProps[];
 }
@@ -17,17 +17,10 @@ export const Header = ({
   subTitle,
   breadcrumbs,
 }: HeaderProps): JSX.Element => {
+  const theme = useTheme(); 
+
   return (
     <Box display="flex" flexDirection="column" gap={1} marginBottom={5}>
-      <Box>
-        <Typography variant="h4">{title}</Typography>
-        {subTitle && (
-          <Typography variant="body1" fontWeight={500} color="textSecondary">
-            {subTitle}
-          </Typography>
-        )}
-      </Box>
-
       <Box>
         <Breadcrumbs separator="›">
           {breadcrumbs.map(({ label, redirectTo }, index) =>
@@ -52,6 +45,17 @@ export const Header = ({
           )}
         </Breadcrumbs>
       </Box>
+
+      {(title || subTitle) && (
+        <Box>
+          {title && <Typography variant="h4" color={theme.palette.grey[500]}>{title}</Typography>}
+          {subTitle && (
+            <Typography variant="body1" fontWeight={500} color="textSecondary">
+              {subTitle}
+            </Typography>
+          )}
+        </Box>
+      )}
     </Box>
   );
 };

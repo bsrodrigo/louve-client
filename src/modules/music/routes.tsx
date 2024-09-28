@@ -1,29 +1,43 @@
 import { lazy } from "react";
 import { RouteObject } from "react-router-dom";
 
-import { Typography } from "@mui/material";
-
+const AllMusicsPage = lazy(
+  () => import("@/modules/music/pages/all-musics-page")
+);
+const MusicsFoldersPage = lazy(
+  () => import("@/modules/music/pages/musics-folders-page")
+);
+const MusicFolderPage = lazy(
+  () => import("@/modules/music/pages/music-folder-page")
+);
 const MusicDetails = lazy(
   () => import("@/modules/music/pages/music-details-page")
 );
 
 export const musicRoutes: RouteObject[] = [
   {
-    path: "music-details",
-
+    path: "musics",
     children: [
       {
         index: true,
-        element: (
-          <div>
-            <Typography variant="h5" color="textSecondary">
-              Item não encontrado
-            </Typography>
-          </div>
-        ),
+        element: <AllMusicsPage />,
       },
-      { path: ":id", element: <MusicDetails /> },
+      {
+        path: "folders",
+        children: [
+          {
+            index: true,
+            element: <MusicsFoldersPage />,
+          },
+          {
+            path: ":folderId",
+            children: [
+              { index: true, element: <MusicFolderPage /> },
+              { path: ":musicId", element: <MusicDetails /> },
+            ],
+          },
+        ],
+      },
     ],
-    errorElement: "Error",
   },
 ];

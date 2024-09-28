@@ -2,10 +2,6 @@ import { Box, useTheme } from "@mui/material";
 // @ts-ignore
 import ReactFileViewer from "react-file-viewer";
 
-const onError = (e: any) => {
-  console.log(e, "error in file-viewer");
-};
-
 interface FileViewerProps {
   file: string;
   type: string;
@@ -39,7 +35,7 @@ export const FileViewer = ({ file, type }: FileViewerProps) => {
         <ReactFileViewer
           fileType={type}
           filePath={file}
-          onError={onError}
+          onError={() => alert("Erro ao abrir arquivo")}
           width={100}
         />
       </Box>

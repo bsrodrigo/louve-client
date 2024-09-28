@@ -31,7 +31,6 @@ export const PartnersProvider = ({
       setLoading(true);
 
       const response = await getPartnersService();
-      console.log({ response });
       dispatch({ type: ActionTypes.GET_PARTNERS, payload: response });
     } catch (error) {
       console.error({ error });

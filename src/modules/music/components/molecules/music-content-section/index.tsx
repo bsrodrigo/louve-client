@@ -17,7 +17,6 @@ export const MusicContentSection = ({
   const [scope, animate] = useAnimate();
 
   const handleToggle = () => {
-    console.log({ scope });
     if (scope.current.offsetHeight === 0) {
       animate(scope.current, { height: "auto", overflow: "unset" });
       animate(iconRef.current, { rotate: 0 });

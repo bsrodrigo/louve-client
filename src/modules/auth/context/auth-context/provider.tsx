@@ -44,12 +44,9 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
         if (!auth) return;
 
         onAuthStateChanged(auth, (user) => {
-          if (user) {
-            console.log({ user });
-            dispatch({ type: ActionTypes.SET_USER, payload: user });
-          } else {
-            console.log("user is signed out");
-          }
+          if (!user) return;
+
+          dispatch({ type: ActionTypes.SET_USER, payload: user });
         });
       } catch (error) {
         console.error("Error in loadAuth AuthProvider", { error });
@@ -104,7 +101,6 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
         password
       );
       const { user } = userCredential;
-      console.log({ user, userCredential });
 
       await dispatch({ type: ActionTypes.SET_USER, payload: user });
       redirectUser();

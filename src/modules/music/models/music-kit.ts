@@ -7,6 +7,7 @@ export interface MusicKitDocumentItem {
   title: string;
   src: string;
   fileType: string;
+  viewFileOpen?: boolean;
 }
 
 export interface UsefulLinksItem {
@@ -36,8 +37,6 @@ export interface MusicKit {
   id?: string;
   name: string;
   artist?: string;
-  // avaliar mudança de estrutura
-  // kitGroups?: kitGroup[];
   originalSound?: string;
   audioKit?: MusicAudioItem[];
   documents?: MusicKitDocumentItem[];

@@ -8,6 +8,6 @@ import { PartnersListFaker } from "@/modules/partners/infra/fakers";
 
 export const getPartnersService = async (): Promise<Partner[]> => {
   const partners = PartnersListFaker();
-  console.log({ partners });
+
   return partners;
 };

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { redirect, useLocation, useParams } from "react-router-dom";
 
 import { Menu05Icon, Menu11Icon } from "hugeicons-react";
 import { useAnimate } from "framer-motion";
@@ -22,6 +22,7 @@ export const NavBar = (): JSX.Element => {
   const [scope, animate] = useAnimate();
   const theme = useTheme();
   const { pathname } = useLocation();
+  const params = useParams();
 
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isClosedInLocalStorage = getLocalStorage("navbar:isClosed");
@@ -71,6 +72,11 @@ export const NavBar = (): JSX.Element => {
 
     setIsClosed(isClosedInLocalStorage);
   }, [isMobile]);
+
+  const pathnameWithoutParams = Object.values(params).reduce(
+    (path: string, param) => path.replace("/" + param, ""),
+    location.pathname
+  );
 
   return (
     <>
@@ -123,9 +129,13 @@ export const NavBar = (): JSX.Element => {
 
           <Box display="flex" flexDirection="column" gap={theme.spacing(2)}>
             {menuList.map(({ items, title }) => {
-              const isGroupActive = items.some(
-                ({ redirectTo }) => pathname === redirectTo
-              );
+              const isGroupActive = items.some(({ redirectTo }) => {
+                if (redirectTo === "/") {
+                  return pathname === redirectTo;
+                }
+
+                return pathname?.includes(redirectTo);
+              });
 
               return (
                 <Box
@@ -142,14 +152,15 @@ export const NavBar = (): JSX.Element => {
                     {title}
                   </Typography>
 
-                  {items.map(({ label, Icon, redirectTo }) => (
+                  {items.map(({ label, Icon, redirectTo, disabled }) => (
                     <NavBarItem
                       key={`menu-item-${label}`}
                       label={label}
                       Icon={Icon}
                       redirectTo={redirectTo}
                       isClosed={isClosed}
-                      isActive={pathname === redirectTo}
+                      isActive={pathnameWithoutParams === redirectTo}
+                      isDisabled={disabled}
                       onClick={() => setIsMobileNavOpen(false)}
                     />
                   ))}

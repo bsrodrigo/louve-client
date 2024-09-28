@@ -17,20 +17,20 @@ const HomePage = (): JSX.Element => {
           text: "Tenha acesso aos louvores do seu grupo na palma da sua mão!",
           url: shareUrl,
         });
-        console.log("Conteúdo compartilhado com sucesso!");
       } catch (error) {
         console.error("Erro ao compartilhar:", error);
       }
-    } else {
-      navigator.clipboard.writeText(shareUrl).then(
-        () => {
-          alert("Link copiado para a área de transferência!");
-        },
-        (err) => {
-          console.error("Erro ao copiar link:", err);
-        }
-      );
+      return;
     }
+
+    navigator.clipboard.writeText(shareUrl).then(
+      () => {
+        alert("Link copiado para a área de transferência!");
+      },
+      (err) => {
+        console.error("Erro ao copiar link:", err);
+      }
+    );
   };
 
   return (
