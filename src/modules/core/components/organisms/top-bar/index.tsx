@@ -1,22 +1,12 @@
-import {
-  Avatar,
-  Box,
-  Typography,
-  useColorScheme,
-  useTheme,
-} from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 
-import { Logo, ThemeModeSwitch } from "@/modules/core/components/atoms";
-import { useAuthContext } from "@/modules/auth/context/auth-context";
 import { UserDropdown } from "@/modules/core/components/organisms";
+import { SelectGroup } from "@/modules/group/components/molecules";
 
 interface TopBarProps {}
 
 export const TopBar = ({}: TopBarProps): JSX.Element => {
   const theme = useTheme();
-  const { mode, systemMode, setMode } = useColorScheme();
-
-  const currentMode = mode === "system" ? systemMode : mode;
 
   return (
     <Box
@@ -24,16 +14,9 @@ export const TopBar = ({}: TopBarProps): JSX.Element => {
       display="flex"
       justifyContent="flex-end"
       alignItems="center"
+      gap={2}
     >
-      <Box>
-        <ThemeModeSwitch
-          sx={{ m: 1 }}
-          checked={currentMode === "dark"}
-          onChange={(_event, checked) => {
-            setMode(checked ? "dark" : "light");
-          }}
-        />
-      </Box>
+      <SelectGroup groups={[]} onSelectGroup={() => null} />
 
       <UserDropdown />
     </Box>

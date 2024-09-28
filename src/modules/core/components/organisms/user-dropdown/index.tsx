@@ -1,25 +1,38 @@
 import { useState } from "react";
 
 import {
+  useColorScheme,
   Avatar,
   Box,
   Menu,
   MenuItem,
   Typography,
   useTheme,
+  useMediaQuery,
+  IconButton,
 } from "@mui/material";
 
-import { Logo } from "@/modules/core/components/atoms";
+import { Logo, ThemeModeSwitch } from "@/modules/core/components/atoms";
 import { useAuthContext } from "@/modules/auth/context/auth-context";
-import { Logout04Icon } from "hugeicons-react";
+import {
+  ArrowDown01Icon,
+  Logout04Icon,
+  MoreVerticalCircle01Icon,
+  MoreVerticalIcon,
+  MoreVerticalSquare01Icon,
+} from "hugeicons-react";
 import { useNavigate } from "react-router-dom";
 
 interface UserDropdownProps {}
 
 export const UserDropdown = ({}: UserDropdownProps): JSX.Element => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const navigate = useNavigate();
+  const { mode, systemMode, setMode } = useColorScheme();
   const { user, logout } = useAuthContext();
+
+  const currentMode = mode === "system" ? systemMode : mode;
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -52,6 +65,14 @@ export const UserDropdown = ({}: UserDropdownProps): JSX.Element => {
             horizontal: "center",
           }}
         >
+          <MenuItem>
+            <ThemeModeSwitch
+              checked={currentMode === "dark"}
+              onChange={(_event, checked) => {
+                setMode(checked ? "dark" : "light");
+              }}
+            />
+          </MenuItem>
           <MenuItem
             onClick={() => {
               handleClose();
@@ -63,7 +84,6 @@ export const UserDropdown = ({}: UserDropdownProps): JSX.Element => {
               Logout
             </Typography>
           </MenuItem>
-          <MenuItem />
         </Menu>
       );
     }
@@ -101,6 +121,14 @@ export const UserDropdown = ({}: UserDropdownProps): JSX.Element => {
         >
           <Typography typography="body2">Cadatrar</Typography>
         </MenuItem>
+        <MenuItem>
+          <ThemeModeSwitch
+            checked={currentMode === "dark"}
+            onChange={(_event, checked) => {
+              setMode(checked ? "dark" : "light");
+            }}
+          />
+        </MenuItem>
       </Menu>
     );
   };
@@ -114,16 +142,9 @@ export const UserDropdown = ({}: UserDropdownProps): JSX.Element => {
         height={64}
         bgcolor={theme.palette.background.paper}
         padding={1}
-        gap={1}
         onClick={handleOpen}
+        sx={{ cursor: "pointer" }}
       >
-        <Box padding={1}>
-          <Typography variant="caption">Olá,</Typography>
-          <Typography variant="body2">
-            {firstName ? firstName : "Faça login"}
-          </Typography>
-        </Box>
-
         <Avatar
           sx={{
             width: 48,
@@ -131,10 +152,24 @@ export const UserDropdown = ({}: UserDropdownProps): JSX.Element => {
             bgcolor: firstName
               ? theme.palette.primary.main
               : theme.palette.background.paper,
+            marginRight: 1,
           }}
         >
           {firstName ? firstName?.[0] : <Logo width={24} />}
         </Avatar>
+
+        {!isMobile && (
+          <Box>
+            <Typography variant="caption">Olá,</Typography>
+            <Typography variant="body2">
+              {firstName ? firstName : "Faça login"}
+            </Typography>
+          </Box>
+        )}
+
+        <IconButton size="small">
+          <MoreVerticalCircle01Icon />
+        </IconButton>
       </Box>
 
       {renderMenu()}
