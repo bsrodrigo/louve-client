@@ -20,7 +20,7 @@ import { useAuthContext } from "@/modules/auth/context/auth-context";
 
 const LoginPage = (): JSX.Element => {
   const navigate = useNavigate();
-  const { loading, user, getLogin } = useAuthContext();
+  const { loading, getLogin } = useAuthContext();
   const { mode, systemMode } = useColorScheme();
   const currentMode = mode === "system" ? systemMode : mode;
 
@@ -34,16 +34,12 @@ const LoginPage = (): JSX.Element => {
         return;
       }
       await getLogin(email, password);
+
+      navigate("/");
     } catch (error: any) {
       console.error({ error });
     }
   };
-
-  useEffect(() => {
-    if (user?.uid) {
-      navigate("/");
-    }
-  }, [user]);
 
   return (
     <Box

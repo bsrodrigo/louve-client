@@ -14,11 +14,9 @@ interface TopBarProps {}
 
 export const TopBar = ({}: TopBarProps): JSX.Element => {
   const theme = useTheme();
-  const { user } = useAuthContext();
   const { mode, systemMode, setMode } = useColorScheme();
 
   const currentMode = mode === "system" ? systemMode : mode;
-  const firstName = user?.displayName?.split(" ")[0];
 
   return (
     <Box

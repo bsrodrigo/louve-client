@@ -48,7 +48,7 @@ export const Header = ({
 
       {(title || subTitle) && (
         <Box>
-          {title && <Typography variant="h4" color={theme.palette.grey[500]}>{title}</Typography>}
+          {title && <Typography variant="h4" color={theme.palette.grey[600]}>{title}</Typography>}
           {subTitle && (
             <Typography variant="body1" fontWeight={500} color="textSecondary">
               {subTitle}

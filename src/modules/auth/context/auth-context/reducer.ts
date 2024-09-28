@@ -1,4 +1,4 @@
-import { User } from "firebase/auth";
+import { User } from "@/modules/auth/models";
 
 export interface InitialState {
   user: User | null;

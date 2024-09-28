@@ -16,21 +16,22 @@ interface BootstrapProviderProps {
 export const BootstrapProvider = ({
   children,
 }: BootstrapProviderProps): JSX.Element => {
-  const firebaseApp = initializeApp(firebaseConfig);
+  const [firebaseApp, setFirebaseApp] = useState<FirebaseApp>(null!);
   const [analytics, setAnalytics] = useState<Analytics>(null!);
   const [firestore, setFirestore] = useState<Firestore>(null!);
 
-  const [pageLoading, setPageLoading] = useState<boolean>(false);
-
-  initializeApp(firebaseConfig);
+  const [pageLoading, setPageLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const load = async () => {
       try {
         setPageLoading(true);
-        const analyticsLoaded = await getAnalytics(firebaseApp);
-        const firestoreDbLoaded = await getFirestore(firebaseApp);
+        const firebaseAppLoaded = await initializeApp(firebaseConfig);
+        console.log({ firebaseAppLoaded });
+        const analyticsLoaded = await getAnalytics(firebaseAppLoaded);
+        const firestoreDbLoaded = await getFirestore(firebaseAppLoaded);
 
+        setFirebaseApp(firebaseAppLoaded);
         setAnalytics(analyticsLoaded);
         setFirestore(firestoreDbLoaded);
       } catch (error) {
@@ -41,7 +42,7 @@ export const BootstrapProvider = ({
     };
 
     load();
-  }, [firebaseApp]);
+  }, []);
 
   return (
     <BootstrapContext.Provider

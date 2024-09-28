@@ -19,7 +19,7 @@ import {
 import { useAuthContext } from "@/modules/auth/context/auth-context";
 
 const RegisterPage = (): JSX.Element => {
-  const { user, loading, createUser } = useAuthContext();
+  const { loading, createUser } = useAuthContext();
   const { mode, systemMode } = useColorScheme();
   const navigate = useNavigate();
 
@@ -45,19 +45,14 @@ const RegisterPage = (): JSX.Element => {
         return;
       }
 
-      createUser(email, password, name);
+      await createUser(email, password, name);
+      navigate("/");
     } catch (error: any) {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.error({ errorCode, errorMessage });
     }
   };
-
-  useEffect(() => {
-    if (user?.uid) {
-      navigate("/");
-    }
-  }, [user]);
 
   return (
     <Box
@@ -110,12 +105,11 @@ const RegisterPage = (): JSX.Element => {
               placeholder="email@exemplo.com"
               fullWidth
             />
-            <TextField
+            <PasswordTextField
               name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               label="Password"
-              type="password"
               variant="outlined"
               placeholder="**********"
               fullWidth

@@ -23,7 +23,7 @@ export const UserDropdown = ({}: UserDropdownProps): JSX.Element => {
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  const firstName = user?.displayName?.split(" ")[0];
+  const firstName = user?.name?.split(" ")[0];
   const open = Boolean(anchorEl);
 
   const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -34,7 +34,7 @@ export const UserDropdown = ({}: UserDropdownProps): JSX.Element => {
   };
 
   const renderMenu = (): JSX.Element => {
-    if (user?.uid) {
+    if (user?.id) {
       return (
         <Menu
           sx={{ marginTop: 1 }}

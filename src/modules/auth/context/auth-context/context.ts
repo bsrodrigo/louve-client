@@ -1,5 +1,5 @@
-import { User } from "firebase/auth";
 import { createContext, useContext } from "react";
+import { User } from "@/modules/auth/models";
 
 export interface authContextProps {
   user: User | null;
