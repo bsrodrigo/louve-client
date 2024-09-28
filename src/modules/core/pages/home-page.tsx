@@ -70,7 +70,7 @@ const HomePage = (): JSX.Element => {
             size="large"
             fullWidth
           >
-            Cria um grupo
+            Criar um grupo
           </Button>
         </Box>
       </Box>
