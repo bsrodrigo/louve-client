@@ -41,26 +41,25 @@ const HomePage = (): JSX.Element => {
         </Box>
 
         <Box textAlign="center">
+          <Typography variant="body1" fontWeight={500}>Bom te ver por aqui!</Typography>
           <Typography variant="body1">
-            Huumm... Parece que você ainda não está em nenhum grupo
-          </Typography>
-          <Typography variant="body1">
-            Que tal criar um grupo pra gente começar a cantar por aí?
+            Vamos dar uma ensaiada nos hinos do nosse congresso. É só clicar no
+            botão a baixo.
           </Typography>
         </Box>
 
         <Box display="flex" flexWrap="wrap" gap={2}>
           <Button
-            variant="outlined"
+            variant="contained"
             color="primary"
             startIcon={<MusicNote01Icon />}
-            onClick={() => navigate("/musics")}
+            onClick={() => navigate("/musics/folders/00002")}
             size="large"
             fullWidth
           >
-            Acessar músicas do Demo
+            Músicas - Congresso 2024
           </Button>
-          <Button
+          {/* <Button
             variant="contained"
             color="primary"
             startIcon={<UserGroupIcon />}
@@ -69,7 +68,7 @@ const HomePage = (): JSX.Element => {
             fullWidth
           >
             Criar um grupo
-          </Button>
+          </Button> */}
         </Box>
         <GroupProvider>
           <GroupForm open={open} onClose={() => setOpen(false)} />
