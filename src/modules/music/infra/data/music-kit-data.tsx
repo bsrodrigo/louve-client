@@ -66,6 +66,20 @@ export const musicKitsData: MusicKit[] = [
     name: "A Boa Parte",
     artist: "Phop music, part. Nívea Soares",
     originalSound: "assets/sounds/m3-original.mp3",
+    audioKit: [
+      {
+        title: "Soprano",
+        src: "assets/sounds/m3-soprano.m4a",
+      },
+      {
+        title: "Contralto",
+        src: "assets/sounds/m3-contralto.m4a",
+      },
+      {
+        title: "Tenor",
+        src: "assets/sounds/m3-tenor.m4a",
+      },
+    ],
     documents: [
       {
         title: "Letra",
@@ -78,6 +92,41 @@ export const musicKitsData: MusicKit[] = [
       {
         title: "Música original Youtube",
         link: "https://www.youtube.com/watch?v=dlGOiuxSzVw",
+      },
+    ],
+  },
+
+  {
+    id: "00000004",
+    name: "Até te encontrar",
+    artist: "One Music",
+    originalSound: "assets/sounds/m4-original.mp3",
+    audioKit: [
+      {
+        title: "Soprano",
+        src: "assets/sounds/m4-soprano.m4a",
+      },
+      {
+        title: "Contralto",
+        src: "assets/sounds/m4-contralto.m4a",
+      },
+      {
+        title: "Tenor",
+        src: "assets/sounds/m4-tenor.mp3",
+      },
+    ],
+    documents: [
+      {
+        title: "Letra",
+        src: "/assets/documents/m4-lyrics.pdf",
+        fileType: "pdf",
+        viewFileOpen: true,
+      },
+    ],
+    usefulLinks: [
+      {
+        title: "Música original Youtube",
+        link: "https://www.youtube.com/watch?v=pTNJKMnLjiE",
       },
     ],
   },
