@@ -43,7 +43,7 @@ const HomePage = (): JSX.Element => {
         <Box textAlign="center">
           <Typography variant="body1" fontWeight={500}>Bom te ver por aqui!</Typography>
           <Typography variant="body1">
-            Vamos dar uma ensaiada nos hinos do nosse congresso. É só clicar no
+            Vamos dar uma ensaiada nos hinos do nosso congresso? É só clicar no
             botão a baixo.
           </Typography>
         </Box>
