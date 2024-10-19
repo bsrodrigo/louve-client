@@ -1,4 +1,12 @@
-import { CloudDownloadIcon, Link01Icon } from "hugeicons-react";
+import {
+  ArrowExpand01Icon,
+  ArrowExpandIcon,
+  CancelCircleIcon,
+  CloudDownloadIcon,
+  Link01Icon,
+  SquareArrowDiagonal01Icon,
+  SquareArrowShrink02Icon,
+} from "hugeicons-react";
 
 import {
   Box,
@@ -10,6 +18,8 @@ import {
   useTheme,
 } from "@mui/material";
 import { AudioPlayer, FileViewer } from "@/modules/core/components/molecules";
+import { useEffect, useRef, useState } from "react";
+import { useAnimate } from "framer-motion";
 
 export interface MusicItemSectionProps {
   title?: string;
@@ -32,6 +42,36 @@ export const MusicItemSection = ({
   hideTitle,
 }: MusicItemSectionProps): JSX.Element => {
   const theme = useTheme();
+  const [scope, animate] = useAnimate();
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
+
+  useEffect(() => {
+    console.log({ isExpanded });
+    console.log({ scope: scope?.current });
+    if (!scope?.current) {
+      return;
+    }
+
+    if (isExpanded) {
+      animate(scope?.current, {
+        position: "fixed",
+        width: "100vw",
+        height: "100vh",
+        top: 0,
+        left: 0,
+        zIndex: 999,
+      });
+    } else {
+      animate(scope?.current, {
+        position: "unset",
+        width: "auto",
+        height: "auto",
+        top: "auto",
+        left: "auto",
+        zIndex: "unset",
+      });
+    }
+  }, [isExpanded, scope]);
 
   const handleDownload = () => {
     if (!src) {
@@ -39,12 +79,12 @@ export const MusicItemSection = ({
       return;
     }
 
-    const link = document.createElement("a");
-    link.href = src;
-    link.download = title || "file-downloaded";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const linkElement = document.createElement("a");
+    linkElement.href = src;
+    linkElement.download = title || "file-downloaded";
+    document.body.appendChild(linkElement);
+    linkElement.click();
+    document.body.removeChild(linkElement);
   };
 
   if (!src && !link) {
@@ -60,7 +100,6 @@ export const MusicItemSection = ({
         gap={1}
       >
         <Link01Icon />
-
         <Link href={link} target="_blank" rel="noopener noreferrer">
           {title || link}
         </Link>
@@ -86,7 +125,6 @@ export const MusicItemSection = ({
             width="100%"
           >
             <AudioPlayer title={title} artist={artist} src={src} />
-
             <IconButton
               aria-label="download"
               size="small"
@@ -101,6 +139,7 @@ export const MusicItemSection = ({
 
       {type === "document" && src && documentType && (
         <Box
+          ref={scope}
           bgcolor={theme.palette.background.default}
           borderRadius={4}
           paddingTop={2}
@@ -122,6 +161,18 @@ export const MusicItemSection = ({
               >
                 Baixar
               </Button>
+
+              <IconButton
+                color="primary"
+                size="small"
+                onClick={() => setIsExpanded(!isExpanded)}
+              >
+                {isExpanded ? (
+                  <CancelCircleIcon />
+                ) : (
+                  <SquareArrowDiagonal01Icon />
+                )}
+              </IconButton>
             </Box>
             <FileViewer file={src} type={documentType} />
           </Container>
