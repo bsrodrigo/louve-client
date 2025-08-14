@@ -81,7 +81,6 @@ export const getLoginService = async (
 
 export const logoutService = async (): Promise<void> => {
   const auth = getAuth();
-  const db = getFirestore();
 
   await auth.signOut();
 };

@@ -1,27 +1,81 @@
-import { Box, Button, Typography, useTheme } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { RenderSvg } from "@/modules/core/components/atoms";
 import { Header } from "../components/molecules";
-import {
-  GroupItemsIcon,
-  MusicNote01Icon,
-  UserGroupIcon,
-  UserIcon,
-} from "hugeicons-react";
+import { MusicNote01Icon, UserGroupIcon, UserIcon } from "hugeicons-react";
 import { useNavigate } from "react-router-dom";
-import { GroupProvider } from "@/modules/group/context/group-context";
+import { useGroupContext } from "@/modules/group/context/group-context";
 import { GroupForm } from "@/modules/group/components/organisms";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { useAuthContext } from "@/modules/auth/context/auth-context";
 
 const HomePage = (): JSX.Element => {
-  const theme = useTheme();
   const navigate = useNavigate();
+  const { group } = useGroupContext();
+  const { user } = useAuthContext();
 
   const [open, setOpen] = useState(false);
 
+  const subTitle = useMemo(
+    () => (group?.name ? `Bem vindo ao grupo ${group?.name}` : "Bem vindo!"),
+    [group?.name]
+  );
+
+  const infoText = useMemo(() => {
+    if (!user?.id) {
+      return (
+        <Typography variant="body1">
+          Para dar início nessa jornada, você pode acessar seu usuário ou criar
+          um.
+        </Typography>
+      );
+    }
+
+    if (!group?.id) {
+      return (
+        <Typography variant="body1">
+          Para dar continuarmos nessa jornada, você pode criar um grupo ou
+          acessar um já existente.
+        </Typography>
+      );
+    }
+
+    return (
+      <Typography variant="body1">
+        Vamos dar início a essa jornada, de ensaios organizados? Acesse suas
+        músicas.
+      </Typography>
+    );
+  }, [user?.id, group?.id]);
+
+  const { buttonAction, buttonText, ButtonIcon } = useMemo(() => {
+    if (!user?.id) {
+      return {
+        buttonAction: () => navigate("/auth"),
+        buttonText: "Entrar",
+        ButtonIcon: UserIcon,
+      };
+    }
+
+    if (!group?.id) {
+      return {
+        buttonAction: () => setOpen(true),
+        buttonText: "Criar um grupo",
+        ButtonIcon: UserGroupIcon,
+      };
+    }
+
+    return {
+      buttonAction: () => navigate("/musics/folders/00002"),
+      buttonText: "Músicas - Congresso 2024",
+      ButtonIcon: MusicNote01Icon,
+    };
+  }, [user?.id, group?.id]);
+
   return (
-    <Box>
+    <>
       <Header
-        title="Olá, bem vindo!"
+        title="Home"
+        subTitle={subTitle}
         breadcrumbs={[
           {
             label: "Home",
@@ -41,42 +95,32 @@ const HomePage = (): JSX.Element => {
         </Box>
 
         <Box textAlign="center">
-          <Typography variant="body1" fontWeight={500}>Bom te ver por aqui!</Typography>
-          <Typography variant="body1">
-            Vamos dar uma ensaiada nos hinos do nosso congresso? É só clicar no
-            botão a baixo.
+          <Typography variant="body1" fontWeight={500}>
+            Estou feliz em te ver por aqui!
           </Typography>
+
+          {infoText}
         </Box>
 
         <Box display="flex" flexWrap="wrap" gap={2}>
           <Button
             variant="contained"
             color="primary"
-            startIcon={<MusicNote01Icon />}
-            onClick={() => navigate("/musics/folders/00002")}
+            startIcon={<ButtonIcon size={20} />}
+            onClick={buttonAction}
             size="large"
             fullWidth
           >
-            Músicas - Congresso 2024
+            {buttonText}
           </Button>
-          {/* <Button
-            variant="contained"
-            color="primary"
-            startIcon={<UserGroupIcon />}
-            onClick={() => setOpen(true)}
-            size="large"
-            fullWidth
-          >
-            Criar um grupo
-          </Button> */}
         </Box>
-        <GroupProvider>
-          <GroupForm open={open} onClose={() => setOpen(false)} />
-        </GroupProvider>
       </Box>
-    </Box>
+
+      <GroupForm open={open} onClose={() => setOpen(false)} />
+    </>
   );
 };
+
 HomePage.displayName = "HomePage";
 
 export default HomePage;

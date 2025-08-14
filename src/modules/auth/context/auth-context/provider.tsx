@@ -1,6 +1,5 @@
 import { ReactNode, useEffect, useReducer, useState } from "react";
 
-import { useBootstrapContext } from "@/modules/core/contexts/bootstrap";
 import { LoadingContent } from "@/modules/core/components/molecules";
 import {
   createUserService,
@@ -16,7 +15,6 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
-  const { firebaseApp } = useBootstrapContext();
   const [state, dispatch] = useReducer(reducer, initialState);
   const [loading, setLoading] = useState<boolean>(false);
   const [pageLoading, setPageLoading] = useState<boolean>(false);
@@ -25,14 +23,17 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
     const loadAuth = async () => {
       try {
         setPageLoading(true);
-        observerAuthService((user) => {
-          if (!user) return;
+        await observerAuthService(async (user) => {
+          if (!user) {
+            setPageLoading(false);
+            return;
+          }
 
           dispatch({ type: ActionTypes.SET_USER, payload: user });
+          setPageLoading(false);
         });
       } catch (error) {
         console.error("Error in loadAuth AuthProvider", { error });
-      } finally {
         setPageLoading(false);
       }
     };
@@ -64,6 +65,7 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
       const user = await getLoginService(email, password);
 
       await dispatch({ type: ActionTypes.SET_USER, payload: user });
+      window.location.href = "/";
     } catch (error) {
       alert("Usuário ou senha inválidos");
       console.error("Error in getLogin AuthProvider", { error });
@@ -74,14 +76,16 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
 
   const logout = async () => {
     try {
-      setLoading(true);
-      await logoutService;
+      setPageLoading(true);
+      await logoutService();
 
-      dispatch({ type: ActionTypes.CLEAR_USER });
+      await dispatch({ type: ActionTypes.CLEAR_USER });
+
+      window.location.reload();
     } catch (error) {
       console.error("error in logout AuthProvider", { error });
     } finally {
-      setLoading(false);
+      setPageLoading(false);
     }
   };
 

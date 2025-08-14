@@ -34,8 +34,6 @@ const LoginPage = (): JSX.Element => {
         return;
       }
       await getLogin(email, password);
-
-      navigate("/");
     } catch (error: any) {
       console.error({ error });
     }

@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/modules/core/contexts";
 import { router } from "@/modules/core/routes";
 import { BootstrapProvider } from "@/modules/core/contexts/bootstrap";
 import { AuthProvider } from "@/modules/auth/context/auth-context";
+import { GroupProvider } from "@/modules/group/context/group-context";
 
 const App: React.FC = () => {
   return (
@@ -16,7 +17,9 @@ const App: React.FC = () => {
         <BootstrapProvider>
           <AuthProvider>
             <Suspense fallback={<LinearProgress />}>
-              <RouterProvider router={router} />
+              <GroupProvider>
+                <RouterProvider router={router} />
+              </GroupProvider>
             </Suspense>
           </AuthProvider>
         </BootstrapProvider>

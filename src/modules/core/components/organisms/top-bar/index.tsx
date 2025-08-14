@@ -2,11 +2,12 @@ import { Box, useTheme } from "@mui/material";
 
 import { UserDropdown } from "@/modules/core/components/organisms";
 import { SelectGroup } from "@/modules/group/components/molecules";
+import { useGroupContext } from "@/modules/group/context/group-context";
 
-interface TopBarProps {}
+// interface TopBarProps {}
 
-export const TopBar = ({}: TopBarProps): JSX.Element => {
-  const theme = useTheme();
+export const TopBar = (): JSX.Element => {
+  const { groupsList } = useGroupContext();
 
   return (
     <Box
@@ -16,7 +17,7 @@ export const TopBar = ({}: TopBarProps): JSX.Element => {
       alignItems="center"
       gap={2}
     >
-      <SelectGroup groups={[]} onSelectGroup={() => null} />
+      {!!groupsList?.length && <SelectGroup />}
 
       <UserDropdown />
     </Box>

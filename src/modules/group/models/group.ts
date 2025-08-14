@@ -1,8 +1,8 @@
-export type GroupPermissionTypes = "ADMIN" | "EDITOR";
+export type GroupRolesTypes = "ADMIN" | "EDITOR";
 
-export interface GroupMember {
-  id: string;
-  permission: GroupPermissionTypes[];
+export interface GroupMemberRoles {
+  memberId: string;
+  roles: GroupRolesTypes[];
 }
 
 export interface Group {
@@ -10,7 +10,8 @@ export interface Group {
   creatorId?: string;
   name: string;
   description: string;
-  members?: GroupMember[];
+  members?: string[];
+  membersRoles?:GroupMemberRoles[];
   musicKitsFolders?: string[];
   createdAt?: Date;
 }
